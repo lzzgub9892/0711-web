@@ -1,0 +1,6 @@
+body {margin:0;}
+#container { border: #000 solid 1px; width:1200px; height: 700px; margin: auto;}
+#top {  height: 20%; text-align: center; line-height: 140px; font-size:30px; text-shadow: 5px 5px 5px black;}
+#bottom {  height: 80%;}
+#bottom_left {  float: left; height: 100%; width: 20%;}
+#bottom_right {  float: left; height: 100%; width: 80%;}
