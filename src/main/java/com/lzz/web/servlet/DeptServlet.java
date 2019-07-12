@@ -8,11 +8,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.lzz.domain.Dept;
 import com.lzz.domain.Page;
 import com.lzz.service.IDeptService;
 import com.lzz.service.impl.DeptServiceImpl;
+import com.lzz.utils.WebUtils;
 
 public class DeptServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -32,16 +34,14 @@ public class DeptServlet extends HttpServlet {
 		}
 	}
 	private void edit(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int did = Integer.parseInt(request.getParameter("did"));
-		String dname=request.getParameter("dname");
-		Dept d=new Dept(did, dname);
+		Dept d=WebUtils.request2Bean(request, Dept.class);
 		service.update(d);
 		response.sendRedirect("dept.do");
 
 		
 	}
 	private void editForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int did = Integer.parseInt(request.getParameter("did"));
+		Integer did=Integer.parseInt(request.getParameter("did"));
 		Dept d=service.find(did);
 		request.setAttribute("dept", d);
 		request.getRequestDispatcher("/dept/edit.jsp").forward(request, response);
@@ -52,20 +52,32 @@ public class DeptServlet extends HttpServlet {
 		response.sendRedirect("dept.do");
 	}
 	private void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String dname=request.getParameter("dname");
-		Dept d=new Dept();
-		d.setDname(dname);
+		Dept d=WebUtils.request2Bean(request, Dept.class);
 		service.save(d);
 		response.sendRedirect("dept.do");
 	}
 	private void findAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pStr=request.getParameter("p");
+		HttpSession session = request.getSession();
+		int p;
 		if(pStr==null) {
-			pStr="1";
+			Integer x=(Integer) session.getAttribute("x");
+			if(x!=null) {
+				p=x;
+			}else {
+				p=1;
+			}
+		}else {
+			try {
+				p = Integer.parseInt(pStr);
+			} catch (NumberFormatException e) {
+				p=1;
+			}
 		}
-		int p=Integer.parseInt(pStr);
+		session.setAttribute("x", p);
 		int size=5;
 		Page<Dept> pb=service.findPageData(p, size);
+		pb.setServletName("dept.do");
 		request.setAttribute("page", pb);
 		request.getRequestDispatcher("/dept/deptList.jsp").forward(request, response);
 	}

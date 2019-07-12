@@ -13,7 +13,16 @@ public class Page<T> {
 	private int startPage;
 	private int endPage;
 	private List<T> list;
+	private String servletName;
 	
+	public String getServletName() {
+		return servletName;
+	}
+
+	public void setServletName(String servletName) {
+		this.servletName = servletName;
+	}
+
 	public Page(int p, int rowCount, int size) {
 		super();
 		this.p = p;

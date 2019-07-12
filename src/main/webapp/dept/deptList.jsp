@@ -35,29 +35,8 @@
 		</tr>
 		</c:forEach>
 		<tr>
-			<td>
-				<span style="color: red;font-size: 40">${page.p }</span>
-				||
-				${page.maxPage }
-				<a href="dept.do?p=1">首页</a>
-				<a href="dept.do?p=${page.prev }">上一页</a>
-				<c:forEach begin="${page.startPage }" end="${page.endPage }" var="i">
-				<c:if test="${page.p==i }">
-					<span style="color: red">${i }</span>
-				</c:if>
-				<c:if test="${page.p!=i }">
-					<a href="dept.do?p=${i }">${i }</a>
-				</c:if>
-				</c:forEach>
-				<a href="dept.do?p=${page.next }">下一页</a>
-				<a href="dept.do?p=${page.maxPage }">末页</a>
-				
-				<form action="dept.do" method="post" style="display: inline;">
-					跳到第<input size="1" type="text" name="p" />页
-					<button type="submit">GO</button>
-				</form>
-				共【${page.rowCount }】条记录
-			
+			<td colspan="3">
+				<%@ include file="../include/page.jsp" %>			
 			</td>
 		</tr>
 	</table>
