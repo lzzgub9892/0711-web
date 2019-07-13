@@ -30,12 +30,22 @@
     <filter-name>CharacterEncodingFilter</filter-name>
     <filter-class>com.lzz.web.filter.CharacterEncodingFilter</filter-class>
     <init-param>
-    	<param-name>encoding</param-name>
-    	<param-value>utf-8</param-value>
+      <param-name>encoding</param-name>
+      <param-value>utf-8</param-value>
     </init-param>
   </filter>
   <filter-mapping>
     <filter-name>CharacterEncodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EmpServlet</display-name>
+    <servlet-name>EmpServlet</servlet-name>
+    <servlet-class>com.lzz.web.servlet.EmpServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmpServlet</servlet-name>
+    <url-pattern>/emp.do</url-pattern>
+  </servlet-mapping>
 </web-app>

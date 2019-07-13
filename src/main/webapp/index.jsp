@@ -35,7 +35,7 @@ $(function() {
 				<span class="menu">员工管理</span>
 				<ul>
 					<li><a href="emp.do" target="mainFrame">查看员工</a></li>
-					<li><a href="add.jsp" target="mainFrame">添加员工</a></li>
+					<li><a href="emp.do?method=addForm" target="mainFrame">添加员工</a></li>
 				</ul>
 			</li>
 		</ul>
